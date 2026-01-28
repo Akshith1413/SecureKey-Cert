@@ -9,6 +9,7 @@ import api from '../services/api.js';
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const [activityData, setActivityData] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,11 +19,19 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const [certsRes, keysRes, logsRes] = await Promise.all([
+      // Use Promise.allSettled to ensure some data loads even if other parts fail (permissions)
+      const results = await Promise.allSettled([
         api.get('/certificates'),
         api.get('/keys'),
-        api.get('/audit-logs?limit=10'),
+        api.get('/audit-logs?limit=10'),   // Reverted to global/role-based logs (as previously working)
+        api.get('/audit-logs/stats/mine')   // Keep personalized graph
       ]);
+
+      const certsRes = results[0].status === 'fulfilled' ? results[0].value : { data: { data: [] } };
+      const keysRes = results[1].status === 'fulfilled' ? results[1].value : { data: { data: [] } };
+
+      const logsRes = results[2].status === 'fulfilled' ? results[2].value : { data: { data: [] } };
+      const activityRes = results[3].status === 'fulfilled' ? results[3].value : { data: { data: [] } };
 
       const certs = certsRes.data.data || [];
       const keys = keysRes.data.data || [];
@@ -34,6 +43,10 @@ const Dashboard = () => {
         activeKeys: keys.filter((k) => k.status === 'active').length,
         recentActivity: logsRes.data.data || [],
       });
+
+      if (activityRes.data.data) {
+        setActivityData(activityRes.data.data);
+      }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
@@ -41,15 +54,18 @@ const Dashboard = () => {
     }
   };
 
-  const chartData = [
-    { name: 'Mon', certs: 4, keys: 2 },
-    { name: 'Tue', certs: 3, keys: 3 },
-    { name: 'Wed', certs: 2, keys: 5 },
-    { name: 'Thu', certs: 5, keys: 4 },
-    { name: 'Fri', certs: 6, keys: 3 },
-    { name: 'Sat', certs: 2, keys: 2 },
-    { name: 'Sun', certs: 3, keys: 1 },
+  // Mock data as fallback if API returns nothing (initial state)
+  const defaultChartData = [
+    { name: 'Mon', activity: 0, certs: 0, keys: 0 },
+    { name: 'Tue', activity: 0, certs: 0, keys: 0 },
+    { name: 'Wed', activity: 0, certs: 0, keys: 0 },
+    { name: 'Thu', activity: 0, certs: 0, keys: 0 },
+    { name: 'Fri', activity: 0, certs: 0, keys: 0 },
+    { name: 'Sat', activity: 0, certs: 0, keys: 0 },
+    { name: 'Sun', activity: 0, certs: 0, keys: 0 },
   ];
+
+  const chartData = activityData.length > 0 ? activityData : defaultChartData;
 
   const securityStats = [
     { name: 'Active', value: stats?.activeKeys || 0, color: '#10B981' },
@@ -187,7 +203,16 @@ const Dashboard = () => {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151' }} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#ffffff',
+                  borderColor: '#3b82f6',
+                  borderRadius: '8px',
+                  color: '#1e3a8a',
+                  fontWeight: 'bold',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
           <div className="mt-4 space-y-2 text-sm">
@@ -237,13 +262,12 @@ const Dashboard = () => {
                   {new Date(activity.createdAt).toLocaleDateString()}
                 </p>
                 <span
-                  className={`text-xs font-semibold capitalize ${
-                    activity.severity === 'critical'
-                      ? 'text-red-400'
-                      : activity.severity === 'high'
-                        ? 'text-orange-400'
-                        : 'text-gray-400'
-                  }`}
+                  className={`text-xs font-semibold capitalize ${activity.severity === 'critical'
+                    ? 'text-red-400'
+                    : activity.severity === 'high'
+                      ? 'text-orange-400'
+                      : 'text-gray-400'
+                    }`}
                 >
                   {activity.severity}
                 </span>

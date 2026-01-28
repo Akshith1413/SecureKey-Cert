@@ -108,7 +108,7 @@ const Register = () => {
       >
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gradient mb-2">SCKLMS</h1>
+          <h1 className="text-4xl font-bold text-gradient mb-2">ST-CIMP</h1>
           <p className="text-gray-400">Create your account</p>
         </div>
 
@@ -132,7 +132,7 @@ const Register = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="John"
-                    className="input-field pl-10 text-sm"
+                    className="input-field pl-12 text-sm"
                   />
                 </div>
                 {errors.firstName && (
@@ -150,7 +150,7 @@ const Register = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Doe"
-                    className="input-field pl-10 text-sm"
+                    className="input-field pl-12 text-sm"
                   />
                 </div>
                 {errors.lastName && (
@@ -170,7 +170,7 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className="input-field pl-10 text-sm"
+                  className="input-field pl-12 text-sm"
                 />
               </div>
               {errors.email && (
@@ -187,7 +187,7 @@ const Register = () => {
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="input-field pl-10 text-sm appearance-none bg-gray-800"
+                  className="input-field pl-12 text-sm appearance-none bg-gray-800"
                 >
                   <option value="system_client">Developer</option>
                   <option value="auditor">Auditor</option>
@@ -206,7 +206,7 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field pl-10 text-sm"
+                  className="input-field pl-12 text-sm"
                 />
               </div>
               {errors.password && (
@@ -225,7 +225,7 @@ const Register = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field pl-10 text-sm"
+                  className="input-field pl-12 text-sm"
                 />
               </div>
               {errors.confirmPassword && (

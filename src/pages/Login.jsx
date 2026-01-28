@@ -105,8 +105,8 @@ const Login = () => {
               <Lock className="w-8 h-8 text-slate-900" />
             </div>
           </motion.div>
-          <h1 className="text-4xl font-bold text-gradient mb-2">SCKLMS</h1>
-          <p className="text-gray-400">Secure Certificate & Key Management</p>
+          <h1 className="text-4xl font-bold text-gradient mb-2">ST-CIMP</h1>
+          <p className="text-gray-400">Secure Trust & Cryptographic Infrastructure Management Platform</p>
         </div>
 
         {/* Login Form */}
@@ -128,7 +128,7 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                 />
               </div>
               {errors.email && (
@@ -154,7 +154,7 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field pl-10"
+                  className="input-field pl-12"
                 />
               </div>
               {errors.password && (
@@ -202,17 +202,7 @@ const Login = () => {
           </div>
         </motion.div>
 
-        {/* Demo Credentials */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-6 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg text-sm text-gray-300"
-        >
-          <p className="font-semibold mb-2 text-blue-300">Demo Credentials:</p>
-          <p>Email: admin@scklms.com</p>
-          <p>Password: Admin@123456</p>
-        </motion.div>
+
       </motion.div>
     </div>
   );

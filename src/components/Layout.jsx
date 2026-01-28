@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-lg flex items-center justify-center">
                     <Lock className="w-6 h-6 text-slate-900" />
                   </div>
-                  <span className="font-bold text-lg text-gradient">SCKLMS</span>
+                  <span className="font-bold text-lg text-gradient">ST-CIMP</span>
                 </div>
               </motion.div>
 
@@ -74,8 +74,8 @@ const Layout = ({ children }) => {
                           setSidebarOpen(false);
                         }}
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${isActive
-                            ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg'
-                            : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                          ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg'
+                          : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                           }`}
                       >
                         <Icon className="w-5 h-5" />
