@@ -170,14 +170,13 @@ const Certificates = () => {
 
       {/* Filters */}
       <div className="flex gap-4 flex-wrap">
-        <div className="flex-1 min-w-64 relative">
-          <Search className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+        <div className="flex-1 min-w-64">
           <input
             type="text"
             placeholder="Search certificates..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="input-field pl-10"
+            className="input-field"
           />
         </div>
         <select
@@ -424,8 +423,8 @@ const Certificates = () => {
             <div className="space-y-4">
               {/* Status Banner */}
               <div className={`p-4 rounded-lg ${viewCert.status === 'valid' ? 'bg-green-900/30 border border-green-700' :
-                  viewCert.status === 'revoked' ? 'bg-red-900/30 border border-red-700' :
-                    'bg-yellow-900/30 border border-yellow-700'
+                viewCert.status === 'revoked' ? 'bg-red-900/30 border border-red-700' :
+                  'bg-yellow-900/30 border border-yellow-700'
                 }`}>
                 <div className="flex items-center gap-3">
                   {viewCert.status === 'valid' ? <CheckCircle className="w-6 h-6 text-green-400" /> : <AlertCircle className="w-6 h-6 text-red-400" />}

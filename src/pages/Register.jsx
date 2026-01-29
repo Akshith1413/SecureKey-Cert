@@ -126,8 +126,8 @@ const Register = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-300">First Name</label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                <div className="relative flex items-center">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="firstName"
@@ -144,8 +144,8 @@ const Register = () => {
 
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-300">Last Name</label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                <div className="relative flex items-center">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="lastName"
@@ -164,8 +164,8 @@ const Register = () => {
             {/* Email Field */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">Email Address</label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+              <div className="relative flex items-center">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="email"
                   name="email"
@@ -183,8 +183,8 @@ const Register = () => {
             {/* Role Selection */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">User Role</label>
-              <div className="relative">
-                <Users className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+              <div className="relative flex items-center">
+                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <select
                   name="role"
                   value={formData.role}
@@ -200,20 +200,20 @@ const Register = () => {
             {/* Password Field */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">Password</label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+              <div className="relative flex items-center">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field !pl-12 pr-10 text-sm"
+                  className="input-field !pl-12 !pr-12 text-sm"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors z-10"
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
@@ -230,20 +230,20 @@ const Register = () => {
             {/* Confirm Password */}
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">Confirm Password</label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+              <div className="relative flex items-center">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field !pl-12 pr-10 text-sm"
+                  className="input-field !pl-12 !pr-12 text-sm"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors z-10"
                 >
                   {showConfirmPassword ? (
                     <EyeOff className="w-5 h-5" />

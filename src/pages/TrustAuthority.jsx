@@ -57,7 +57,7 @@ export default function TrustAuthority() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8 rounded-2xl m-2">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -151,11 +151,10 @@ export default function TrustAuthority() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          auth.status === 'active'
+                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${auth.status === 'active'
                             ? 'bg-green-500/20 text-green-400'
                             : 'bg-yellow-500/20 text-yellow-400'
-                        }`}>
+                          }`}>
                           {auth.status.toUpperCase()}
                         </span>
                       </td>

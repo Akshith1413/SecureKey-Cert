@@ -81,16 +81,16 @@ export default function CryptoPolicies() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8 rounded-2xl m-2">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-7xl mx-auto"
       >
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 pt-2">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent mb-2">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent mb-2 leading-normal pb-1">
               Cryptographic Policies
             </h1>
             <p className="text-slate-400">Define and manage enterprise crypto standards</p>
@@ -158,11 +158,10 @@ export default function CryptoPolicies() {
                       </h3>
                       <p className="text-slate-400 text-sm mt-1">{policy.description}</p>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      policy.status === 'active'
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-gray-500/20 text-gray-400'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${policy.status === 'active'
+                      ? 'bg-green-500/20 text-green-400'
+                      : 'bg-gray-500/20 text-gray-400'
+                      }`}>
                       {policy.status}
                     </span>
                   </div>

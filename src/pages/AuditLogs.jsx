@@ -168,14 +168,13 @@ const AuditLogs = () => {
 
       {/* Filters */}
       <div className="flex gap-4 flex-wrap">
-        <div className="flex-1 min-w-64 relative">
-          <Search className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+        <div className="flex-1 min-w-64">
           <input
             type="text"
             placeholder="Search logs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="input-field pl-10"
+            className="input-field"
           />
         </div>
         <select
@@ -249,13 +248,12 @@ const AuditLogs = () => {
                   </td>
                   <td className="px-6 py-4">
                     <span
-                      className={`capitalize ${
-                        log.status === 'success'
-                          ? 'text-green-400'
-                          : log.status === 'failure'
-                            ? 'text-red-400'
-                            : 'text-yellow-400'
-                      }`}
+                      className={`capitalize ${log.status === 'success'
+                        ? 'text-green-400'
+                        : log.status === 'failure'
+                          ? 'text-red-400'
+                          : 'text-yellow-400'
+                        }`}
                     >
                       {log.status}
                     </span>

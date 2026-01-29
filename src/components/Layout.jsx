@@ -39,25 +39,36 @@ const Layout = ({ children }) => {
             animate={{ x: 0 }}
             exit={{ x: -280 }}
             transition={{ duration: 0.3 }}
-            className="fixed md:relative w-64 h-screen glass border-r border-gray-700 z-40 md:z-auto"
+            className="fixed md:relative w-72 h-screen z-40 md:z-auto overflow-hidden"
+            style={{
+              background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(15, 23, 42, 0.98) 100%)',
+              borderRight: '1px solid rgba(59, 130, 246, 0.2)',
+              boxShadow: '4px 0 24px rgba(0, 0, 0, 0.3)'
+            }}
           >
-            <div className="p-6 h-full flex flex-col">
-              {/* Logo */}
+            <div className="p-5 h-full flex flex-col">
+              {/* Logo Section */}
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="mb-8"
+                className="mb-6 flex-shrink-0 pb-5 border-b border-gray-700/50"
               >
                 <div className="flex items-center gap-3 group cursor-pointer">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-lg flex items-center justify-center">
+                  <div className="w-11 h-11 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
                     <Lock className="w-6 h-6 text-slate-900" />
                   </div>
-                  <span className="font-bold text-lg text-gradient">ST-CIMP</span>
+                  <div>
+                    <span className="font-bold text-xl bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">ST-CIMP</span>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-wider">Key Management</p>
+                  </div>
                 </div>
               </motion.div>
 
-              {/* Navigation */}
-              <nav className="flex-1 space-y-2">
+              {/* Navigation Label */}
+              <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-3 px-2 font-semibold">Navigation</p>
+
+              {/* Navigation - Scrollable */}
+              <nav className="flex-1 space-y-1 overflow-y-auto min-h-0 pr-1 sidebar-scroll">
                 {menuItems
                   .filter((item) => item.show)
                   .map((item, idx) => {
@@ -67,44 +78,66 @@ const Layout = ({ children }) => {
                     return (
                       <motion.button
                         key={idx}
-                        whileHover={{ x: 4 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ x: 4, backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => {
                           navigate(item.path);
                           setSidebarOpen(false);
                         }}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${isActive
-                          ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-300 ${isActive
+                          ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/30'
+                          : 'text-gray-400 hover:text-white'
                           }`}
                       >
-                        <Icon className="w-5 h-5" />
-                        <span>{item.label}</span>
+                        <div className={`p-1.5 rounded-lg ${isActive ? 'bg-white/20' : 'bg-gray-800/50'}`}>
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <span className="text-sm">{item.label}</span>
+                        {isActive && (
+                          <div className="ml-auto w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        )}
                       </motion.button>
                     );
                   })}
               </nav>
 
-              {/* User Info */}
-              <div className="border-t border-gray-700 pt-4 space-y-4">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  onClick={() => navigate('/settings')}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200"
-                >
-                  <Settings className="w-5 h-5" />
-                  <span>Settings</span>
-                </motion.button>
+              {/* User Profile Card */}
+              <div className="flex-shrink-0 mt-4 pt-4 border-t border-gray-700/50">
+                {/* User Info */}
+                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-xl p-3 mb-3 border border-gray-700/30">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-lg flex items-center justify-center text-slate-900 font-bold text-sm shadow-md">
+                      {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white font-medium text-sm truncate">{user?.firstName} {user?.lastName}</p>
+                      <p className="text-gray-500 text-[10px] uppercase tracking-wider">{user?.role?.replace('_', ' ')}</p>
+                    </div>
+                  </div>
+                </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-all duration-200"
-                >
-                  <LogOut className="w-5 h-5" />
-                  <span>Logout</span>
-                </motion.button>
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-2">
+                  <motion.button
+                    whileHover={{ scale: 1.03, backgroundColor: 'rgba(59, 130, 246, 0.15)' }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => navigate('/settings')}
+                    className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-gray-400 hover:text-blue-400 transition-all duration-200 border border-gray-700/30 hover:border-blue-500/30"
+                  >
+                    <Settings className="w-4 h-4" />
+                    <span className="text-xs font-medium">Settings</span>
+                  </motion.button>
+
+                  <motion.button
+                    whileHover={{ scale: 1.03, backgroundColor: 'rgba(239, 68, 68, 0.15)' }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={handleLogout}
+                    className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-gray-400 hover:text-red-400 transition-all duration-200 border border-gray-700/30 hover:border-red-500/30"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span className="text-xs font-medium">Logout</span>
+                  </motion.button>
+                </div>
               </div>
             </div>
           </motion.div>

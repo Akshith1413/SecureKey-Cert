@@ -121,8 +121,8 @@ const Login = () => {
             {/* Email Field */}
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-300">Email Address</label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+              <div className="relative flex items-center">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="email"
                   name="email"
@@ -147,20 +147,20 @@ const Login = () => {
             {/* Password Field */}
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-300">Password</label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+              <div className="relative flex items-center">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field !pl-12 pr-10"
+                  className="input-field !pl-12 !pr-12"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors z-10"
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />

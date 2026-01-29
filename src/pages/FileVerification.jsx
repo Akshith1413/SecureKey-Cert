@@ -49,15 +49,15 @@ export default function FileVerification() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 p-8 rounded-2xl m-2">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-4xl mx-auto"
       >
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-green-600 bg-clip-text text-transparent mb-2">
+        <div className="mb-8 pt-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-green-600 bg-clip-text text-transparent mb-2 leading-normal pb-1">
             File Integrity Verification
           </h1>
           <p className="text-slate-400">Detect tampering and verify digital signatures</p>
@@ -129,11 +129,10 @@ export default function FileVerification() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`bg-gradient-to-br ${
-              result.tampered
-                ? 'from-red-900/20 to-red-800/20 border border-red-700/50'
-                : 'from-green-900/20 to-green-800/20 border border-green-700/50'
-            } rounded-xl backdrop-blur-sm p-8`}
+            className={`bg-gradient-to-br ${result.tampered
+              ? 'from-red-900/20 to-red-800/20 border border-red-700/50'
+              : 'from-green-900/20 to-green-800/20 border border-green-700/50'
+              } rounded-xl backdrop-blur-sm p-8`}
           >
             <div className="flex items-start gap-4 mb-6">
               <div className="text-5xl">
@@ -171,9 +170,8 @@ export default function FileVerification() {
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4">
                 <p className="text-slate-400 text-sm mb-1">MITM Risk Level</p>
-                <p className={`text-lg font-semibold ${
-                  result.mitmRiskLevel === 'low' ? 'text-green-400' : 'text-red-400'
-                }`}>
+                <p className={`text-lg font-semibold ${result.mitmRiskLevel === 'low' ? 'text-green-400' : 'text-red-400'
+                  }`}>
                   {result.mitmRiskLevel.toUpperCase()}
                 </p>
               </div>
