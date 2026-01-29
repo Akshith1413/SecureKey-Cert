@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, AlertCircle, Users } from 'lucide-react';
+import { User, Mail, Lock, Users, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import toast from 'react-hot-toast';
 
@@ -16,8 +16,10 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    role: '',
+    role: 'system_client',
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -125,14 +127,14 @@ const Register = () => {
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-300">First Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+                  <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="John"
-                    className="input-field pl-12 text-sm"
+                    className="input-field !pl-12 text-sm"
                   />
                 </div>
                 {errors.firstName && (
@@ -143,14 +145,14 @@ const Register = () => {
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-300">Last Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+                  <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Doe"
-                    className="input-field pl-12 text-sm"
+                    className="input-field !pl-12 text-sm"
                   />
                 </div>
                 {errors.lastName && (
@@ -163,14 +165,14 @@ const Register = () => {
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+                <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className="input-field pl-12 text-sm"
+                  className="input-field !pl-12 text-sm"
                 />
               </div>
               {errors.email && (
@@ -182,12 +184,12 @@ const Register = () => {
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">User Role</label>
               <div className="relative">
-                <Users className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+                <Users className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <select
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="input-field pl-12 text-sm appearance-none bg-gray-800"
+                  className="input-field !pl-12 text-sm appearance-none bg-gray-800"
                 >
                   <option value="system_client">Developer</option>
                   <option value="auditor">Auditor</option>
@@ -199,15 +201,26 @@ const Register = () => {
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field pl-12 text-sm"
+                  className="input-field !pl-12 pr-10 text-sm"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
               </div>
               {errors.password && (
                 <p className="text-red-400 text-xs mt-1">{errors.password}</p>
@@ -218,15 +231,26 @@ const Register = () => {
             <div>
               <label className="block text-sm font-medium mb-1 text-gray-300">Confirm Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
+                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <input
-                  type="password"
+                  type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="input-field pl-12 text-sm"
+                  className="input-field !pl-12 pr-10 text-sm"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
               </div>
               {errors.confirmPassword && (
                 <p className="text-red-400 text-xs mt-1">{errors.confirmPassword}</p>
