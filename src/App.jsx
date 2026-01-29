@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 // Pages
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import MfaVerify from './pages/MfaVerify.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Certificates from './pages/Certificates.jsx';
 import Keys from './pages/Keys.jsx';
@@ -43,6 +44,7 @@ const AppRoutes = () => {
       {/* Public Routes */}
       <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />} />
       <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />} />
+      <Route path="/mfa-verify" element={isAuthenticated ? <Navigate to="/dashboard" /> : <MfaVerify />} />
 
       {/* Protected Routes */}
       <Route
